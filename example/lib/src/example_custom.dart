@@ -98,7 +98,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _radius = 10.0;
     _padding = 0.0;
     _loop = true;
-    _itemCount = 1;
+    _itemCount = 2;
     _autoplayDelay = 3000;
     _viewportFraction = 0.8;
     _outer = false;
@@ -147,11 +147,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       itemCount: _itemCount,
       scrollDirection: _scrollDirection,
       axisDirection: _axisDirection,
-      indicatorLayout: PageIndicatorLayout.COLOR,
       autoplayDisableOnInteraction: _autoplayDisableOnInteraction,
-      pagination: const SwiperPagination(
-          builder: DotSwiperPaginationBuilder(
-              size: 20.0, activeSize: 20.0, space: 10.0)),
     );
   }
 
@@ -162,7 +158,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
         Container(
           color: Colors.black87,
           child: SizedBox(
-            height: 300.0,
+            height: 230.0,
             width: double.infinity,
             child: buildSwiper(),
           ),
