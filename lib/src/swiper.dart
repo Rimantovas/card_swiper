@@ -808,11 +808,6 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   void didUpdateWidget(_TinderSwiper oldWidget) {
     _updateValues();
     super.didUpdateWidget(oldWidget);
@@ -825,7 +820,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     _startIndex = -3;
     _animationCount = 5;
     opacity = [0.0, 0.9, 0.9, 1.0, 0.0, 0.0];
-    scales = [0.80, 0.80, 0.85, 0.90, 1.0, 1.0, 1.0];
+    scales = [0.80, 0.85, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
     _updateValues();
   }
@@ -833,14 +828,25 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   void _updateValues() {
     if (widget.scrollDirection == Axis.horizontal) {
       offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth, _swiperWidth];
-      offsetsY = [
-        0.0,
-        0.0,
-        -5.0,
-        -10.0,
-        -15.0,
-        -20.0,
-      ];
+      if (widget.itemCount < 3) {
+        offsetsY = [
+          0.0,
+          -5.0,
+          -5.0,
+          -10.0,
+          -15.0,
+          -20.0,
+        ];
+      } else {
+        offsetsY = [
+          0.0,
+          0.0,
+          -5.0,
+          -10.0,
+          -15.0,
+          -20.0,
+        ];
+      }
     } else {
       offsetsX = [
         0.0,
@@ -866,7 +872,8 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     final alignment = widget.scrollDirection == Axis.horizontal
         ? Alignment.bottomCenter
         : Alignment.centerLeft;
-
+    // print(
+    //     'index = $i realIndex = $realIndex count = ${widget.itemCount} scale = $s');
     return Opacity(
       opacity: o,
       child: Transform.rotate(
@@ -880,7 +887,9 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
             child: SizedBox(
               width: widget.itemWidth ?? double.infinity,
               height: widget.itemHeight ?? double.infinity,
-              child: widget.itemBuilder!(context, realIndex),
+              child: i < widget.itemCount && widget.itemCount < 3
+                  ? null
+                  : widget.itemBuilder!(context, realIndex),
             ),
           ),
         ),
@@ -893,11 +902,6 @@ class _StackViewState extends _CustomLayoutStateBase<_StackSwiper> {
   late List<double> scales;
   late List<double> offsets;
   late List<double> opacity;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   void _updateValues() {
     if (widget.scrollDirection == Axis.horizontal) {

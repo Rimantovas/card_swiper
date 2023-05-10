@@ -98,7 +98,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _radius = 10.0;
     _padding = 0.0;
     _loop = true;
-    _itemCount = 3;
+    _itemCount = 1;
     _autoplayDelay = 3000;
     _viewportFraction = 0.8;
     _outer = false;
@@ -134,7 +134,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       },
       curve: _curve,
       scale: _scale,
-      itemWidth: 300.0,
+      itemWidth: MediaQuery.of(context).size.width - 2 * 16,
       controller: _controller,
       layout: _layout,
       outer: _outer,
