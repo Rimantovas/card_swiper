@@ -820,7 +820,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     _startIndex = -3;
     _animationCount = 5;
     opacity = [0.0, 0.9, 0.9, 1.0, 0.0, 0.0];
-    scales = [0.80, 0.85, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0];
+    scales = [0.70, 0.9, 0.95, 1.0, 1.0, 1.0, 1.0, 1.0];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
     _updateValues();
   }
@@ -874,23 +874,20 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
         : Alignment.centerLeft;
     // print(
     //     'index = $i realIndex = $realIndex count = ${widget.itemCount} scale = $s');
-    return Opacity(
-      opacity: o,
-      child: Transform.rotate(
-        angle: a / 180.0,
-        child: Transform.translate(
-          key: ValueKey<int>(_currentIndex + i),
-          offset: Offset(f, fy),
-          child: Transform.scale(
-            scale: s,
-            alignment: alignment,
-            child: SizedBox(
-              width: widget.itemWidth ?? double.infinity,
-              height: widget.itemHeight ?? double.infinity,
-              child: i < widget.itemCount && widget.itemCount < 3
-                  ? null
-                  : widget.itemBuilder!(context, realIndex),
-            ),
+    return Transform.rotate(
+      angle: a / 180.0,
+      child: Transform.translate(
+        key: ValueKey<int>(_currentIndex + i),
+        offset: Offset(f, fy),
+        child: Transform.scale(
+          scale: s,
+          alignment: alignment,
+          child: SizedBox(
+            width: widget.itemWidth ?? double.infinity,
+            height: widget.itemHeight ?? double.infinity,
+            child: i < widget.itemCount && widget.itemCount < 3
+                ? null
+                : widget.itemBuilder!(context, realIndex),
           ),
         ),
       ),

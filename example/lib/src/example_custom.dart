@@ -98,7 +98,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
     _radius = 10.0;
     _padding = 0.0;
     _loop = true;
-    _itemCount = 2;
+    _itemCount = 4;
     _autoplayDelay = 3000;
     _viewportFraction = 0.8;
     _outer = false;
@@ -158,7 +158,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
         Container(
           color: Colors.black87,
           child: SizedBox(
-            height: 230.0,
+            height: 220.0,
             width: double.infinity,
             child: buildSwiper(),
           ),
