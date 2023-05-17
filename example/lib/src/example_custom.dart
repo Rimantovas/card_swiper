@@ -134,11 +134,11 @@ class _ExampleCustomState extends State<ExampleCustom> {
       },
       curve: _curve,
       scale: _scale,
-      itemWidth: MediaQuery.of(context).size.width - 2 * 16,
+      itemWidth: MediaQuery.of(context).size.width,
       controller: _controller,
       layout: _layout,
       outer: _outer,
-      itemHeight: 200.0,
+      itemHeight: 240.0,
       viewportFraction: _viewportFraction,
       autoplayDelay: _autoplayDelay,
       loop: _loop,
@@ -156,9 +156,10 @@ class _ExampleCustomState extends State<ExampleCustom> {
     return Column(
       children: <Widget>[
         Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           color: Colors.black87,
           child: SizedBox(
-            height: 220.0,
+            height: 280.0,
             width: double.infinity,
             child: buildSwiper(),
           ),

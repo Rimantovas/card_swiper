@@ -272,6 +272,7 @@ double _getValue(List<double> values, double animationValue, int index) {
       s = s - (s - values[index - 1]) * (0.5 - animationValue) * 2.0;
     }
   }
+
   return s;
 }
 
