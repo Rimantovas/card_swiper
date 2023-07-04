@@ -112,6 +112,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Widget buildSwiper() {
     return Swiper(
+      backgroundColor: Colors.grey,
       onTap: (index) {
         Navigator.of(context).push(MaterialPageRoute<Object>(
           builder: (context) {
@@ -138,7 +139,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
       controller: _controller,
       layout: _layout,
       outer: _outer,
-      itemHeight: 240.0,
+      itemHeight: 316.0,
       viewportFraction: _viewportFraction,
       autoplayDelay: _autoplayDelay,
       loop: _loop,
@@ -159,7 +160,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           color: Colors.black87,
           child: SizedBox(
-            height: 280.0,
+            height: 316.0,
             width: double.infinity,
             child: buildSwiper(),
           ),

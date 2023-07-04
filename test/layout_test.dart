@@ -7,6 +7,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           layout: SwiperLayout.STACK,
           itemWidth: 300.0,
           itemHeight: 200.0,
@@ -28,6 +29,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           layout: SwiperLayout.TINDER,
           itemWidth: 300.0,
           itemHeight: 200.0,
@@ -49,6 +51,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           layout: SwiperLayout.DEFAULT,
           viewportFraction: 0.8,
           scale: 0.9,
@@ -80,6 +83,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           layout: SwiperLayout.CUSTOM,
           itemWidth: 300.0,
           itemHeight: 200.0,

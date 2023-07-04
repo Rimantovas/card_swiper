@@ -10,6 +10,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           itemBuilder: (context, index) {
             return const Text('0');
           },
@@ -25,6 +26,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
+      backgroundColor: Colors.grey,
       onTap: (index) {},
       itemBuilder: (context, index) {
         return const Text('0');
@@ -40,6 +42,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
         home: Swiper.children(
+      backgroundColor: Colors.grey,
       children: const <Widget>[
         Text('0'),
         Text('1'),
@@ -53,6 +56,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MaterialApp(
       home: Swiper.list<String>(
+        backgroundColor: Colors.grey,
         list: ['0', '1'],
         builder: (context, data, index) {
           return Text(data);
@@ -68,6 +72,7 @@ void main() {
     final controller = SwiperController();
     await tester.pumpWidget(MaterialApp(
       home: Swiper(
+        backgroundColor: Colors.grey,
         controller: controller,
         itemBuilder: (context, index) {
           return const Text('0');
@@ -89,6 +94,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Swiper(
+          backgroundColor: Colors.grey,
           controller: controller,
           itemBuilder: (context, index) {
             return const Text('0');
@@ -143,6 +149,7 @@ void main() {
     final controller = SwiperController();
     await tester.pumpWidget(MaterialApp(
       home: Swiper(
+        backgroundColor: Colors.grey,
         controller: controller,
         itemBuilder: (context, index) {
           return const Text('0');
@@ -161,6 +168,7 @@ void main() {
     final controller = SwiperController();
     await tester.pumpWidget(MaterialApp(
         home: Swiper(
+      backgroundColor: Colors.grey,
       controller: controller,
       itemBuilder: (context, index) {
         return const Text('0');

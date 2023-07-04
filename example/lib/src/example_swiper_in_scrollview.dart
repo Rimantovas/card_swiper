@@ -128,6 +128,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 100.0,
                   child: Swiper(
+                    backgroundColor: Colors.grey,
                     scale: 0.8,
                     fade: 0.8,
                     itemBuilder: (c, i) {
@@ -143,6 +144,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 100.0,
                   child: Swiper(
+                      backgroundColor: Colors.grey,
                       scale: 0.8,
                       fade: 0.8,
                       itemBuilder: (c, i) {
@@ -158,6 +160,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 100.0,
                   child: Swiper(
+                      backgroundColor: Colors.grey,
                       scale: 0.8,
                       fade: 0.8,
                       itemBuilder: (c, i) {
@@ -173,6 +176,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 100.0,
                   child: Swiper(
+                      backgroundColor: Colors.grey,
                       outer: true,
                       scale: 0.8,
                       fade: 0.8,
@@ -189,6 +193,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 300.0,
                   child: Swiper(
+                    backgroundColor: Colors.grey,
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return Image.network(
@@ -200,6 +205,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                   height: 100.0,
                   child: Swiper(
                       outer: true,
+                      backgroundColor: Colors.grey,
                       scale: 0.8,
                       fade: 0.8,
                       itemBuilder: (c, i) {
@@ -241,6 +247,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 400.0,
                   child: Swiper(
+                      backgroundColor: Colors.grey,
                       outer: true,
                       itemBuilder: (c, i) {
                         return _buildDynamicCard();
@@ -252,6 +259,7 @@ class _ExampleState extends State<ExampleSwiperInScrollView>
                 SizedBox(
                   height: 100.0,
                   child: Swiper(
+                      backgroundColor: Colors.grey,
                       outer: true,
                       fade: 0.8,
                       viewportFraction: 0.8,

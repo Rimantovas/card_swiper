@@ -43,6 +43,7 @@ class _InnerSwiperState extends State<InnerSwiper> {
     return Scaffold(
       body: Swiper(
         loop: false,
+        backgroundColor: Colors.grey,
         itemCount: 10,
         controller: controller,
         pagination: const SwiperPagination(),
@@ -52,6 +53,7 @@ class _InnerSwiperState extends State<InnerSwiper> {
               SizedBox(
                 child: Swiper(
                   controller: controllers[index],
+                  backgroundColor: Colors.grey,
                   pagination: const SwiperPagination(),
                   itemCount: 4,
                   itemBuilder: (context, index) {

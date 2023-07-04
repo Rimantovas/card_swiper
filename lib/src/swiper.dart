@@ -127,6 +127,8 @@ class Swiper extends StatefulWidget {
 
   final bool allowImplicitScrolling;
 
+  final Color backgroundColor;
+
   const Swiper({
     this.itemBuilder,
     this.indicatorLayout = PageIndicatorLayout.NONE,
@@ -134,6 +136,7 @@ class Swiper extends StatefulWidget {
     ///
     this.transformer,
     required this.itemCount,
+    required this.backgroundColor,
     this.autoplay = false,
     this.layout = SwiperLayout.DEFAULT,
     this.autoplayDelay = kDefaultAutoplayDelayMs,
@@ -209,6 +212,7 @@ class Swiper extends StatefulWidget {
     double scale = 1.0,
     double? fade,
     PageIndicatorLayout indicatorLayout = PageIndicatorLayout.NONE,
+    required Color backgroundColor,
     SwiperLayout layout = SwiperLayout.DEFAULT,
   }) =>
       Swiper(
@@ -245,6 +249,7 @@ class Swiper extends StatefulWidget {
           return children[index];
         },
         itemCount: children.length,
+        backgroundColor: backgroundColor,
       );
 
   static Swiper list<T>({
@@ -280,6 +285,7 @@ class Swiper extends StatefulWidget {
     double? fade,
     PageIndicatorLayout indicatorLayout = PageIndicatorLayout.NONE,
     SwiperLayout layout = SwiperLayout.DEFAULT,
+    required Color backgroundColor,
   }) =>
       Swiper(
         fade: fade,
@@ -311,6 +317,7 @@ class Swiper extends StatefulWidget {
         loop: loop,
         plugins: plugins,
         physics: physics,
+        backgroundColor: backgroundColor,
         itemBuilder: (context, index) {
           return builder(context, list[index], index);
         },
@@ -427,11 +434,6 @@ class _SwiperState extends _SwiperTimerMixin {
 
   bool _isPageViewLayout() {
     return widget.layout == SwiperLayout.DEFAULT;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   bool _getReverse(Swiper widget) => widget.transformer?.reverse ?? false;
@@ -554,6 +556,7 @@ class _SwiperState extends _SwiperTimerMixin {
         onIndexChanged: _onIndexChanged,
         controller: _controller,
         scrollDirection: widget.scrollDirection,
+        backgroundColor: widget.backgroundColor,
       );
     } else if (widget.layout == SwiperLayout.CUSTOM) {
       return _CustomLayoutSwiper(
@@ -696,6 +699,7 @@ abstract class _SubSwiper extends StatefulWidget {
   final bool loop;
   final Axis? scrollDirection;
   final AxisDirection? axisDirection;
+  final Color? backgroundColor;
 
   const _SubSwiper({
     Key? key,
@@ -711,6 +715,7 @@ abstract class _SubSwiper extends StatefulWidget {
     this.scrollDirection = Axis.horizontal,
     this.axisDirection = AxisDirection.left,
     this.onIndexChanged,
+    this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -739,21 +744,24 @@ class _TinderSwiper extends _SubSwiper {
     int? index,
     required bool loop,
     required int itemCount,
+    required Color backgroundColor,
     Axis? scrollDirection,
   })  : assert(itemWidth != null && itemHeight != null),
         super(
-            loop: loop,
-            key: key,
-            itemWidth: itemWidth,
-            itemHeight: itemHeight,
-            itemBuilder: itemBuilder,
-            curve: curve,
-            duration: duration,
-            controller: controller,
-            index: index,
-            onIndexChanged: onIndexChanged,
-            itemCount: itemCount,
-            scrollDirection: scrollDirection);
+          loop: loop,
+          key: key,
+          itemWidth: itemWidth,
+          itemHeight: itemHeight,
+          itemBuilder: itemBuilder,
+          curve: curve,
+          duration: duration,
+          controller: controller,
+          index: index,
+          onIndexChanged: onIndexChanged,
+          itemCount: itemCount,
+          scrollDirection: scrollDirection,
+          backgroundColor: backgroundColor,
+        );
 
   @override
   State<StatefulWidget> createState() {
@@ -819,7 +827,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
 
     _startIndex = -3;
     _animationCount = 5;
-    opacity = [0.0, 0.9, 0.9, 1.0, 0.0, 0.0];
+    opacity = [0.0, 0.9, 0.9, 0.0, 0.0, 0.0];
     scales = [0.70, 0.9, 0.95, 1.0, 1.0, 1.0, 1.0, 1.0];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
     _updateValues();
@@ -828,25 +836,14 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
   void _updateValues() {
     if (widget.scrollDirection == Axis.horizontal) {
       offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth + 20, _swiperWidth + 20];
-      if (widget.itemCount < 3) {
-        offsetsY = [
-          0.0,
-          0.0,
-          5.0,
-          -5.0,
-          -15.0,
-          -20.0,
-        ];
-      } else {
-        offsetsY = [
-          0.0,
-          6.0,
-          -2.0,
-          -10.0,
-          -15.0,
-          -20.0,
-        ];
-      }
+      offsetsY = [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+      ];
     } else {
       offsetsX = [
         0.0,
@@ -867,26 +864,32 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     final f = _getValue(offsetsX, animationValue, i);
     final fy = _getValue(offsetsY, animationValue, i);
     final a = _getValue(rotates, animationValue, i);
+    final o = _getValue(opacity, animationValue, i);
 
     final alignment = widget.scrollDirection == Axis.horizontal
         ? Alignment.bottomCenter
         : Alignment.centerLeft;
     // print(
     //     'index = $i realIndex = $realIndex count = ${widget.itemCount} scale = $s');
-    return Transform.rotate(
-      angle: a / 180.0,
-      child: Transform.translate(
-        key: ValueKey<int>(_currentIndex + i),
-        offset: Offset(f, fy),
-        child: Transform.scale(
-          scale: s,
-          alignment: alignment,
-          child: SizedBox(
-            width: widget.itemWidth ?? double.infinity,
-            height: widget.itemHeight ?? double.infinity,
-            child: i < widget.itemCount && widget.itemCount < 3
-                ? null
-                : widget.itemBuilder!(context, realIndex),
+    return Container(
+      foregroundDecoration: BoxDecoration(
+        color: (widget.backgroundColor ?? Colors.black).withOpacity(o),
+      ),
+      child: Transform.rotate(
+        angle: a / 180.0,
+        child: Transform.translate(
+          key: ValueKey<int>(_currentIndex + i),
+          offset: Offset(f, fy),
+          child: Transform.scale(
+            scale: s,
+            alignment: alignment,
+            child: SizedBox(
+              width: widget.itemWidth ?? double.infinity,
+              height: widget.itemHeight ?? double.infinity,
+              child: i < widget.itemCount && widget.itemCount < 3
+                  ? null
+                  : widget.itemBuilder!(context, realIndex),
+            ),
           ),
         ),
       ),

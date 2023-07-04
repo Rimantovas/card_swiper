@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Swiper(
+        backgroundColor: Colors.grey,
         itemCount: 10,
         itemBuilder: (c, i) {
           return Text('$i');

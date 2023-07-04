@@ -123,6 +123,7 @@ class ExampleHorizontal extends StatelessWidget {
         title: const Text('ExampleHorizontal'),
       ),
       body: Swiper(
+        backgroundColor: Colors.grey,
         itemBuilder: (context, index) {
           final image = images[index];
           return Image.asset(
@@ -150,6 +151,7 @@ class ExampleVertical extends StatelessWidget {
           title: const Text('ExampleVertical'),
         ),
         body: Swiper(
+          backgroundColor: Colors.grey,
           itemBuilder: (context, index) {
             return Image.asset(
               images[index],
@@ -178,6 +180,7 @@ class ExampleFraction extends StatelessWidget {
           children: <Widget>[
             Expanded(
                 child: Swiper(
+              backgroundColor: Colors.grey,
               itemBuilder: (context, index) {
                 return Image.asset(
                   images[index],
@@ -192,6 +195,7 @@ class ExampleFraction extends StatelessWidget {
             )),
             Expanded(
                 child: Swiper(
+              backgroundColor: Colors.grey,
               itemBuilder: (context, index) {
                 return Image.asset(
                   images[index],
@@ -223,6 +227,7 @@ class ExampleCustomPagination extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Swiper(
+                backgroundColor: Colors.grey,
                 itemBuilder: (context, index) {
                   return Image.asset(
                     images[index],
@@ -250,6 +255,7 @@ class ExampleCustomPagination extends StatelessWidget {
             ),
             Expanded(
               child: Swiper(
+                backgroundColor: Colors.grey,
                 itemBuilder: (context, index) {
                   return Image.asset(
                     images[index],
@@ -311,6 +317,7 @@ class ExamplePhone extends StatelessWidget {
             ),
           ),
           Swiper.children(
+            backgroundColor: Colors.grey,
             autoplay: false,
             pagination: const SwiperPagination(
                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
