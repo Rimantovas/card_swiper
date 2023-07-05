@@ -871,25 +871,25 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
         : Alignment.centerLeft;
     // print(
     //     'index = $i realIndex = $realIndex count = ${widget.itemCount} scale = $s');
-    return Container(
-      foregroundDecoration: BoxDecoration(
-        color: (widget.backgroundColor ?? Colors.black).withOpacity(o),
-      ),
-      child: Transform.rotate(
-        angle: a / 180.0,
-        child: Transform.translate(
-          key: ValueKey<int>(_currentIndex + i),
-          offset: Offset(f, fy),
-          child: Transform.scale(
-            scale: s,
-            alignment: alignment,
-            child: SizedBox(
-              width: widget.itemWidth ?? double.infinity,
-              height: widget.itemHeight ?? double.infinity,
-              child: i < widget.itemCount && widget.itemCount < 3
-                  ? null
-                  : widget.itemBuilder!(context, realIndex),
-            ),
+    return Transform.rotate(
+      angle: a / 180.0,
+      child: Transform.translate(
+        key: ValueKey<int>(_currentIndex + i),
+        offset: Offset(f, fy),
+        child: Transform.scale(
+          scale: s,
+          alignment: alignment,
+          child: SizedBox(
+            width: widget.itemWidth ?? double.infinity,
+            height: widget.itemHeight ?? double.infinity,
+            child: i < widget.itemCount && widget.itemCount < 3
+                ? null
+                : Container(
+                    foregroundDecoration: BoxDecoration(
+                      color: (widget.backgroundColor ?? Colors.black)
+                          .withOpacity(o),
+                    ),
+                    child: widget.itemBuilder!(context, realIndex)),
           ),
         ),
       ),

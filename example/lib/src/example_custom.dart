@@ -54,11 +54,16 @@ class _ExampleCustomState extends State<ExampleCustom> {
   TextEditingController numberController = TextEditingController();
 
   Widget _buildItem(BuildContext context, int index) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(_radius)),
-      child: Image.asset(
-        images[index % images.length],
-        fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        print('Tapped $index');
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(_radius)),
+        child: Image.asset(
+          images[index % images.length],
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
@@ -112,7 +117,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Widget buildSwiper() {
     return Swiper(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.black,
       onTap: (index) {
         Navigator.of(context).push(MaterialPageRoute<Object>(
           builder: (context) {
