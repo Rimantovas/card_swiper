@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
-import 'config.dart';
 import 'forms/form_widget.dart';
 
 class ExampleCustom extends StatefulWidget {
@@ -55,15 +54,13 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Widget _buildItem(BuildContext context, int index) {
     return GestureDetector(
-      onTap: () {
-        print('Tapped $index');
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(_radius)),
-        child: Image.asset(
-          images[index % images.length],
-          fit: BoxFit.fill,
-        ),
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(_radius)),
+            border: Border.all(color: Colors.green, width: 8.0),
+            color: Colors.black),
       ),
     );
   }
@@ -162,7 +159,6 @@ class _ExampleCustomState extends State<ExampleCustom> {
     return Column(
       children: <Widget>[
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           color: Colors.black87,
           child: SizedBox(
             height: 316.0,

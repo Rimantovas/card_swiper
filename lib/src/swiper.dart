@@ -640,7 +640,11 @@ class _SwiperState extends _SwiperTimerMixin {
       if (widget.outer) {
         return _buildOuterPagination(
             widget.pagination! as SwiperPagination,
-            listForStack == null ? swiper : Stack(children: listForStack),
+            listForStack == null
+                ? swiper
+                : Stack(
+                    children: listForStack,
+                  ),
             config);
       } else {
         listForStack = _ensureListForStack(
@@ -828,14 +832,14 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     _startIndex = -3;
     _animationCount = 5;
     opacity = [0.0, 0.9, 0.9, 0.0, 0.0, 0.0];
-    scales = [0.70, 0.9, 0.95, 1.0, 1.0, 1.0, 1.0, 1.0];
+    scales = [0.70, 0.9, 0.95, 1.0, 0.8, 1.0, 1.0, 1.0];
     rotates = [0.0, 0.0, 0.0, 0.0, 20.0, 25.0];
     _updateValues();
   }
 
   void _updateValues() {
     if (widget.scrollDirection == Axis.horizontal) {
-      offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth + 20, _swiperWidth + 20];
+      offsetsX = [0.0, 0.0, 0.0, 0.0, _swiperWidth + 40, _swiperWidth + 40];
       offsetsY = [
         0.0,
         0.0,
@@ -867,8 +871,8 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     final o = _getValue(opacity, animationValue, i);
 
     final alignment = widget.scrollDirection == Axis.horizontal
-        ? Alignment.bottomCenter
-        : Alignment.centerLeft;
+        ? Alignment.center
+        : Alignment.center;
     // print(
     //     'index = $i realIndex = $realIndex count = ${widget.itemCount} scale = $s');
     return Transform.rotate(
