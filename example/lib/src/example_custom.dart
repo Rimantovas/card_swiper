@@ -58,9 +58,10 @@ class _ExampleCustomState extends State<ExampleCustom> {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(_radius)),
-            border: Border.all(color: Colors.green, width: 8.0),
-            color: Colors.black),
+          borderRadius: const BorderRadius.all(Radius.circular(50)),
+          border: Border.all(color: Colors.green, width: 8.0),
+          color: Colors.red,
+        ),
       ),
     );
   }
@@ -114,7 +115,7 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   Widget buildSwiper() {
     return Swiper(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       onTap: (index) {
         Navigator.of(context).push(MaterialPageRoute<Object>(
           builder: (context) {
@@ -156,213 +157,76 @@ class _ExampleCustomState extends State<ExampleCustom> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          color: Colors.black87,
-          child: SizedBox(
-            height: 316.0,
-            width: double.infinity,
-            child: buildSwiper(),
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: [
+        SliverPersistentHeader(
+          pinned: true,
+          delegate: SliverPersistentHeaderBuilderDelegate(
+            maxExtentHeight: 300,
+            minExtentHeight: 150,
+            builder: (context, shrinkOffset, overlapsContent) {
+              return Container(
+                color: Colors.transparent,
+                child: buildSwiper(),
+              );
+            },
           ),
         ),
-        Expanded(
-          child: ListView(
-            children: <Widget>[
-              Text('Index:$_currentIndex'),
-              Row(
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      _controller.previous(animation: true);
-                    },
-                    child: const Text('Prev'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _controller.next(animation: true);
-                    },
-                    child: const Text('Next'),
-                  ),
-                  Expanded(
-                      child: TextField(
-                    controller: numberController,
-                  )),
-                  ElevatedButton(
-                    onPressed: () {
-                      final text = numberController.text;
-                      setState(() {
-                        _currentIndex = int.parse(text);
-                      });
-                    },
-                    child: const Text('Update'),
-                  ),
-                ],
-              ),
-              FormWidget(
-                label: 'layout',
-                child: FormSelect<SwiperLayout>(
-                  placeholder: 'Select layout',
-                  value: _layout,
-                  values: const [
-                    SwiperLayout.DEFAULT,
-                    SwiperLayout.STACK,
-                    SwiperLayout.TINDER,
-                    SwiperLayout.CUSTOM
-                  ],
-                  valueChanged: (value) {
-                    _layout = value;
-                    setState(() {});
-                  },
-                ),
-              ),
-              FormWidget(
-                label: 'scrollDirection',
-                child: Switch(
-                    value: _scrollDirection == Axis.horizontal,
-                    onChanged: (value) => setState(() => _scrollDirection =
-                        value ? Axis.horizontal : Axis.vertical)),
-              ),
-              if (_layout == SwiperLayout.STACK)
-                FormWidget(
-                  label: 'axisDirection (left <-> right)',
-                  child: Switch(
-                      value: _axisDirection == AxisDirection.right,
-                      onChanged: (value) => setState(() => _axisDirection =
-                          value ? AxisDirection.right : AxisDirection.left)),
-                ),
-              FormWidget(
-                label: 'autoplayDisableOnInteraction',
-                child: Switch(
-                    value: _autoplayDisableOnInteraction,
-                    onChanged: (value) =>
-                        setState(() => _autoplayDisableOnInteraction = value)),
-              ),
-              //Pannel Begin
-              FormWidget(
-                label: 'loop',
-                child: Switch(
-                    value: _loop,
-                    onChanged: (value) => setState(() => _loop = value)),
-              ),
-              FormWidget(
-                label: 'outer',
-                child: Switch(
-                    value: _outer,
-                    onChanged: (value) => setState(() => _outer = value)),
-              ),
-              //Pannel Begin
-              FormWidget(
-                label: 'autoplay',
-                child: Switch(
-                    value: _autoplay,
-                    onChanged: (value) => setState(() => _autoplay = value)),
-              ),
-
-              FormWidget(
-                label: 'padding',
-                child: NumberPad(
-                  number: _padding,
-                  step: 5.0,
-                  min: 0.0,
-                  max: 30.0,
-                  onChangeValue: (value) {
-                    _padding = value.toDouble();
-                    setState(() {});
-                  },
-                ),
-              ),
-              FormWidget(
-                label: 'scale',
-                child: NumberPad(
-                  number: _scale,
-                  step: 0.1,
-                  min: 0.0,
-                  max: 1.0,
-                  onChangeValue: (value) {
-                    _scale = value.toDouble();
-                    setState(() {});
-                  },
-                ),
-              ),
-              FormWidget(
-                label: 'fade',
-                child: NumberPad(
-                  number: _fade,
-                  step: 0.1,
-                  min: 0.0,
-                  max: 1.0,
-                  onChangeValue: (value) {
-                    _fade = value.toDouble();
-                    setState(() {});
-                  },
-                ),
-              ),
-              FormWidget(
-                label: 'itemCount',
-                child: NumberPad(
-                  number: _itemCount,
-                  step: 1,
-                  min: 0,
-                  max: 100,
-                  onChangeValue: (value) {
-                    _itemCount = value.toInt();
-                    setState(() {});
-                  },
-                ),
-              ),
-
-              FormWidget(
-                label: 'radius',
-                child: NumberPad(
-                  number: _radius,
-                  step: 1.0,
-                  min: 0.0,
-                  max: 30.0,
-                  onChangeValue: (value) {
-                    _radius = value.toDouble();
-                    setState(() {});
-                  },
-                ),
-              ),
-
-              FormWidget(
-                label: 'viewportFraction',
-                child: NumberPad(
-                  number: _viewportFraction,
-                  step: 0.1,
-                  max: 1.0,
-                  min: 0.5,
-                  onChangeValue: (value) {
-                    _viewportFraction = value.toDouble();
-                    setState(() {});
-                  },
-                ),
-              ),
-
-              FormWidget(
-                label: 'curve',
-                child: FormSelect<Curve>(
-                  placeholder: 'Select curve',
-                  value: _curve,
-                  values: const [
-                    Curves.easeInOut,
-                    Curves.ease,
-                    Curves.bounceInOut,
-                    Curves.bounceOut,
-                    Curves.bounceIn,
-                    Curves.fastOutSlowIn
-                  ],
-                  valueChanged: (value) {
-                    _curve = value;
-                    setState(() {});
-                  },
-                ),
-              ),
-            ],
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.red,
+            width: 400,
+            height: 800,
           ),
-        )
+        ),
       ],
     );
+  }
+}
+
+class SliverPersistentHeaderBuilderDelegate
+    extends SliverPersistentHeaderDelegate {
+  final double maxExtentHeight;
+  final double minExtentHeight;
+  final Widget Function(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) builder;
+
+  SliverPersistentHeaderBuilderDelegate({
+    required this.maxExtentHeight,
+    required this.minExtentHeight,
+    required this.builder,
+  });
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
+        ),
+      ),
+      child: builder(context, shrinkOffset, overlapsContent),
+    );
+  }
+
+  @override
+  double get maxExtent => maxExtentHeight;
+
+  @override
+  double get minExtent => minExtentHeight;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
   }
 }
