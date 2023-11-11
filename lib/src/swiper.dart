@@ -868,7 +868,7 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
     final f = _getValue(offsetsX, animationValue, i);
     final fy = _getValue(offsetsY, animationValue, i);
     final a = _getValue(rotates, animationValue, i);
-    // final o = _getValue(opacity, animationValue, i);
+    final o = _getValue(opacity, animationValue, i);
 
     final alignment = widget.scrollDirection == Axis.horizontal
         ? Alignment.center
@@ -889,8 +889,13 @@ class _TinderState extends _CustomLayoutStateBase<_TinderSwiper> {
             child: i < widget.itemCount && widget.itemCount < 3
                 ? null
                 : Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     foregroundDecoration: BoxDecoration(
-                        color: (widget.backgroundColor ?? Colors.black)),
+                        borderRadius: BorderRadius.circular(50),
+                        color: (widget.backgroundColor ?? Colors.black)
+                            .withOpacity(o)),
                     child: widget.itemBuilder!(context, realIndex)),
           ),
         ),
